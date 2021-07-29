@@ -6,9 +6,7 @@
 #include <iomanip>
 
 using namespace std;
-
 int counter = 0;
-
 int counter_student = 0;
 
 int increment(int c)
@@ -41,12 +39,9 @@ int decrement_student(int c)
 
 class entery
 {
-
-private:
+public:
 	string isbn, title, author, edition, publication;
 	int _delete;
-
-public:
 	string name, section, semester, password, enrollment;
 
 	entery() //D constructor
@@ -64,114 +59,35 @@ public:
 		enrollment = "0";
 	}
 
-	void setIsbn(string isb)
+	void setdata(string isb,string ti,string auth,string ed,string pu)
 	{
 		isbn = isb;
-	}
-
-	void setDelete(int del)
-	{
-		_delete = del;
-	}
-
-	void setTitle(string ti)
-	{
+	
 		title = ti;
-	}
-
-	void setAuthor(string auth)
-	{
 		author = auth;
-	}
-
-	void setEdition(string ed)
-	{
+		publication = pu;
 		edition = ed;
 	}
 
-	void setPublication(string pu)
-	{
-		publication = pu;
+	void setDelete(int del){
+		_delete = del;
 	}
-
-
-
-
-	string getIsbn()
-	{
-		return isbn;
-	}
-
 	int getDelete()
 	{
 		return _delete;
 	}
-
-	string getTitle()
-	{
-		return title;
-	}
-	string getAuthor()
-	{
-		return author;
-	}
-	string getEdition()
-	{
-		return edition;
-	}
-	string getPublication()
-	{
-		return publication;
-	}
-
-	void setname(string na)
+	
+	
+	void setdatastudent(string na,string sec,string sem,string pass,string enroll)
 	{
 		name = na;
-	}
-
-	void setsection(string sec)
-	{
 		section = sec;
-	}
-
-	void setsemester(string sem)
-	{
 		semester = sem;
-	}
-
-	void setpassword(string pass)
-	{
 		password = pass;
-	}
-
-	void setenrollment(string enroll)
-	{
 		enrollment = enroll;
 	}
 
-	string getname()
-	{
-		return name;
-	}
-
-	string getsection()
-	{
-		return section;
-	}
-
-	string getsemester()
-	{
-		return semester;
-	}
-
-	string getpassword()
-	{
-		return password;
-	}
-	string getenrollment()
-	{
-		return enrollment;
-	}
+	
 	~entery()
 	{
 		cout << "distructor run:" << endl;
@@ -183,16 +99,13 @@ class addbooks : virtual public entery //inheretance used here ....
 public:
 	void addbook(int counter)
 	{
-
-		string isbn, title, author, edition, publication;
 		system("cls");
 		cout << endl << endl;
 		cout << "\t\t\t\t\t" << setw(31) << setfill('~') << "~" << endl;
 		cout << "\t\t\t\t\t  || LIBRARIAN - INTERFACE ||" << endl;
 		cout << "\t\t\t\t\t" << setw(31) << setfill('~') << "~" << endl;
 		cout << "\n\n\t\t\t\t\t\t   ADD BOOKS " << endl << endl;
-
-
+		
 		if (counter == 10)
 		{
 			cout << "\t\t\t\t\tYOU HAVE REACHED THE MAXIMUM LIMIT TO ADD THE BOOKS " << endl;
@@ -202,9 +115,7 @@ public:
 
 		else
 		{
-
 			cin.ignore();
-
 			cout << "\t\t\t\t\tENTER ISBN : ";
 			getline(cin, isbn);
 
@@ -218,16 +129,12 @@ public:
 			getline(cin, edition);
 
 			cout << "\t\t\t\t\tENTER PUBLICATION : ";
-
 			getline(cin, publication);
 			cout << endl << endl;
-			setIsbn(isbn);
-			setTitle(title);
-			setAuthor(author);
-			setEdition(edition);
-			setPublication(publication);
+			setdata(isbn,title,author,edition,publication);
+			
 			setDelete(0);
-
+	
 			increment(counter);
 
 			cout << "\t\t\t\t\tBOOK ADDED SUCCESFULLY! \n\n\t\t\t\t\tPress any key to continue..." << endl;
@@ -270,12 +177,7 @@ public:
 			cout << "\t\t\t\t\tEnter student Password :";
 			getline(cin, password);
 			cout << endl << endl;
-			setname(name);
-			setenrollment(enrollment);
-			setsection(section);
-			setsemester(semester);
-			setpassword(password);
-
+			setdatastudent(name,section,semester,password,enrollment);
 			increment_student(counter_student);
 			cout << "\t\t\t\t\tStudent ADDED SUCCESFULLY! \n\n\t\t\t\t\tPress any key to continue..." << endl << endl;
 			_getch();
@@ -283,13 +185,10 @@ public:
 	}
 };
 
-class loginstudent : virtual public entery, virtual public addbooks, virtual public addstudent
+class loginstudent :  virtual public addstudent
 {
 public:
 	string name, pass;
-
-	bool press = false;
-
 	void login(int counter_student, loginstudent books[10])
 	{
 		system("cls");
@@ -308,16 +207,14 @@ public:
 
 		else
 		{
-
 			cout << "\t\t\t\t\tPlease Enter Your name :";
 			cin >> name;
-
 			cout << "\t\t\t\t\tPlaese enter your password :";
 			cin >> pass;
 			cout << endl << endl;
 			for (int i = 0; i < counter_student; i++)
 			{
-				if (books[i].getpassword() == pass)
+				if (books[i].password == pass)
 				{
 					cout << "\t\t\t\t\tYou are successfully login your profile !\n";
 					cout << "\n\t\t\t\t\tPress any key to continue . . .";
@@ -332,8 +229,6 @@ public:
 	{
 		int select, borrow, returnbook;
 
-		string isbn, title, author, edition, publication;
-
 		system("cls");
 	b:
 		system("cls");
@@ -341,8 +236,7 @@ public:
 		cout << "\t\t\t\t\t" << setw(31) << setfill('~') << "~" << endl;
 		cout << "\t\t\t\t\t   || STUDENT - INTERFACE ||" << endl;
 		cout << "\t\t\t\t\t" << setw(31) << setfill('~') << "~" << endl << endl << endl;
-
-
+		
 		cout << "\t\t\t\t\tWHAT DO YOU WANT NEXT :\n\n";
 
 		cout << "\t\t\t\t\t[1] - For Borrow_Books: \n";
@@ -358,15 +252,15 @@ public:
 		cout << "\t\t\t\t\t" << setw(31) << setfill('~') << "~" << endl;
 		cout << "\t\t\t\t\t   || STUDENT - INTERFACE ||" << endl;
 		cout << "\t\t\t\t\t" << setw(31) << setfill('~') << "~" << endl << endl << endl;
-
+		string Isbn;
 		if (select == 1)
 		{
 
 			cout << "\t\t\t\t\tPlaese enter Book ISBN: ";
-			cin >> isbn;
+			cin >> Isbn;
 			for (int i = 0; i < counter; i++)
 			{
-				if (books[i].getIsbn() == isbn)
+				if (books[i].isbn == Isbn)
 				{
 					cout << "\t\t\t\t\tBook Founded! \n\n";
 					cout << "\t\t\t\t\tWhat do you want borrow [1] or exit [2] :";
@@ -388,10 +282,8 @@ public:
 
 		else if (select == 2)
 		{
-
 			cout << "\t\t\t\t\tDo yo want to return books: yes [1] or No [2] :";
 			cin >> returnbook;
-
 			if (returnbook == 1)
 			{
 
@@ -417,11 +309,11 @@ public:
 			for (int i = 0; i < counter; i++)
 			{
 				if (!books[i].getDelete())
-					cout << books[i].getIsbn() << "\t\t"
-					<< books[i].getTitle() << "\t\t"
-					<< books[i].getAuthor() << "\t\t"
-					<< books[i].getEdition() << "\t\t"
-					<< books[i].getPublication() << endl
+					cout << books[i].isbn << "\t\t"
+					<< books[i].title << "\t\t"
+					<< books[i].author<< "\t\t"
+					<< books[i].edition << "\t\t"
+					<< books[i].publication<< endl
 					<< endl;
 			}
 			cout << "\n\t\t\t\t\tPress any key to continue . . .";
@@ -440,11 +332,12 @@ public:
 			for (int i = 0; i < counter; i++)
 			{
 				if (books[i].getDelete()){
-					cout << books[i].getIsbn() << "\t\t"
-						<< books[i].getTitle() << "\t\t"
-						<< books[i].getAuthor() << "\t\t"
-						<< books[i].getEdition() << "\t\t"
-						<< books[i].getPublication() << endl;
+					cout << books[i].isbn << "\t\t"
+						<< books[i].title << "\t\t"
+						<< books[i].author << "\t\t"
+						<< books[i].edition << "\t\t"
+						<< books[i].publication << endl
+						<< endl;
 				}
 			}
 			cout << "\n\t\t\t\t\tPress any key to continue . . .";
@@ -460,7 +353,7 @@ class deletebook : virtual public entery, virtual public addbooks, virtual publi
 public:
 	void deleteBooks(int counter, deletebook books[10])
 	{
-		string isbn;
+		string Isbn;
 		int choice;
 		system("cls");
 		cout << endl << endl;
@@ -479,24 +372,19 @@ public:
 		cin.ignore();
 
 		cout << "\t\t\t\t\tENTER ISBN : ";
-		getline(cin, isbn);
+		getline(cin, Isbn);
 
 		for (int i = 0; i < counter; i++)
 		{
-			if (books[i].getIsbn() == isbn)
+			if (books[i].isbn == Isbn)
 			{
 				cout << "\n\n\t\t\t\t\tBOOK FOUND!\n" << endl;
 				cout << "\t\t\t\t\tDo You Want to delete this books yes[1], no[2] :";
 				cin >> choice;
 				if (choice == 1)
 				{
-					books[i].setIsbn("");
-					books[i].setTitle("");
-					books[i].setAuthor("");
-					books[i].setEdition("");
-					books[i].setPublication("");
-
-
+					books[i].setdata("","","","","");
+				
 					decrement(counter);
 
 					cout << "\t\t\t\t\tBOOK DELETED SUCCESFULLY!\n Press any key to continue.." << endl;
@@ -507,11 +395,8 @@ public:
 						books[a] = books[a + 1];
 					}
 
-					books[9].setIsbn("");
-					books[9].setTitle("");
-					books[9].setAuthor("");
-					books[9].setEdition("");
-					books[9].setPublication("");
+					books[9].setdata("", "", "", "", "");
+			
 				}
 
 				else
@@ -528,7 +413,7 @@ public:
 	void editBooks(int counter, editbook books[10])
 	{
 		string editisbn;
-		string isbn, title, author, edition, publication;
+		string Isbn;
 		string choice;
 		system("cls");
 		cout << endl << endl;
@@ -544,11 +429,11 @@ public:
 		}
 		cin.ignore();
 		cout << "\t\t\t\t\tENTER ISBN : ";
-		getline(cin, editisbn);
+		getline(cin, Isbn);
 
 		for (int i = 0; i < counter; i++)
 		{
-			if (books[i].getIsbn() == editisbn)
+			if (books[i].isbn== Isbn)
 			{
 				cout << "\n\n\t\t\t\t\tBOOK FOUND!" << endl << endl;
 				cout << "\t\t\t\t\tDO YOU WANT TO EDIT THE BOOK edit [1] OR exit [2]? ";
@@ -570,13 +455,7 @@ public:
 
 					cout << "\t\t\t\t\tENTER PUBLICATION : ";
 					getline(cin, publication);
-
-					books[i].setIsbn(isbn);
-					books[i].setTitle(title);
-					books[i].setAuthor(author);
-					books[i].setEdition(edition);
-					books[i].setPublication(publication);
-
+					books[i].setdata(isbn, title, author, edition, publication);
 					cout << "\t\t\t\t\tPress any key to proceed.." << endl;
 					_getch();
 				}
@@ -599,7 +478,7 @@ class searchbook : virtual public entery, virtual public addbooks, virtual publi
 public:
 	void searchBooks(int counter, searchbook books[10])
 	{
-		string isbn;
+		string Isbn;
 
 		bool print = false;
 		system("cls");
@@ -618,18 +497,18 @@ public:
 		cin.ignore();
 
 		cout << "\t\t\t\t\tENTER ISBN : ";
-		getline(cin, isbn);
+		getline(cin, Isbn);
 
 		for (int i = 0; i < counter; i++)
 		{
-			if (books[i].getIsbn() == isbn)
+			if (books[i].isbn == Isbn)
 			{
 				cout << "\n\n\t\t\t\t\tBOOK FOUND " << endl << endl;
-				cout << "\t\t\t\t\tISBN : " << books[i].getIsbn() << endl;
-				cout << "\t\t\t\t\tTITLE : " << books[i].getTitle() << endl;
-				cout << "\t\t\t\t\tAUTHOR : " << books[i].getAuthor() << endl;
-				cout << "\t\t\t\t\tEDITION : " << books[i].getEdition() << endl;
-				cout << "\t\t\t\t\tPUBLICATION : " << books[i].getPublication() << endl;
+				cout << "\t\t\t\t\tISBN : " << books[i].isbn << endl;
+				cout << "\t\t\t\t\tTITLE : " << books[i].title<< endl;
+				cout << "\t\t\t\t\tAUTHOR : " << books[i].author << endl;
+				cout << "\t\t\t\t\tEDITION : " << books[i].edition << endl;
+				cout << "\t\t\t\t\tPUBLICATION : " << books[i].publication << endl;
 				print = true;
 			}
 			if (print)
@@ -672,11 +551,11 @@ public:
 			for (int i = 0; i < counter; i++)
 			{
 				if (!books[i].getDelete())
-					cout << books[i].getIsbn() << "\t\t"
-					<< books[i].getTitle() << "\t\t"
-					<< books[i].getAuthor() << "\t\t"
-					<< books[i].getEdition() << "\t\t"
-					<< books[i].getPublication() << endl
+					cout << books[i].isbn << "\t\t"
+					<< books[i].title << "\t\t"
+					<< books[i].author<< "\t\t"
+					<< books[i].edition<< "\t\t"
+					<< books[i].publication << endl
 					<< endl;
 			}
 
@@ -696,11 +575,11 @@ public:
 		cout << "Name          Enrollment           Section          Semester        Password " << endl;
 		for (int i = 0; i < counter_student; i++)
 		{
-			cout << books[i].getname() << "\t\t"
-				<< books[i].getenrollment() << "\t\t"
-				<< books[i].getsection() << "\t\t"
-				<< books[i].getsemester() << "\t\t"
-				<< books[i].getpassword() << endl
+			cout << books[i].name << "\t\t"
+				<< books[i].enrollment << "\t\t"
+				<< books[i].section<< "\t\t"
+				<< books[i].semester << "\t\t"
+				<< books[i].password << endl
 				<< endl;
 		}
 		cout << "\t\t\t\t\tPress any key to continue . . .";
@@ -733,6 +612,81 @@ int quit(void)
 	exit(1);
 }
 
+void setup()
+{
+	cout << "\n\n\n\n\t\t\t\t\tW";
+	Sleep(200);
+	cout << "E";
+	Sleep(200);
+	cout << "L";
+	Sleep(200);
+	cout << "C";
+	Sleep(200);
+	cout << "O";
+	Sleep(200);
+	cout << "M";
+	Sleep(200);
+	cout << "E";
+	Sleep(200);
+	cout << " ";
+	Sleep(200);
+	cout << "T";
+	Sleep(200);
+	cout << "O";
+	Sleep(200);
+	cout << " ";
+	Sleep(200);
+	cout << "S";
+	Sleep(200);
+	cout << "U";
+	Sleep(200);
+	cout << "P";
+	Sleep(200);
+	cout << "E";
+	Sleep(200);
+	cout << "R";
+	Sleep(200);
+	cout << "I";
+	Sleep(200);
+	cout << "O";
+	Sleep(200);
+	cout << "R";
+	Sleep(200);
+
+	cout << " ";
+	Sleep(200);
+
+	cout << "U";
+	Sleep(200);
+	cout << "N";
+	Sleep(200);
+	cout << "I";
+	Sleep(200);
+	cout << "V";
+	Sleep(200);
+	cout << "E";
+	Sleep(200);
+	cout << "R";
+	Sleep(200);
+	cout << "S";
+	Sleep(200);
+	cout << "T";
+	Sleep(200);
+	cout << "Y" << endl;
+	Sleep(200);
+
+
+
+
+	cout << " \t\t\t\t\tLIBARARY MANAGEMENT";
+	Sleep(200);
+	cout << " SYSTEM" << endl;
+	cout << "\t\t\t\t\tTeam Project " << endl;
+	Sleep(200);
+	//	cout << "\t\t\t\t\tPress Any Key To Continue...." << endl;
+	//_getch();
+}
+
 int main()
 {
 	system("color 02");
@@ -746,16 +700,7 @@ int main()
 	do
 	{
 		system("cls");
-		cout << endl << endl;
-		cout << "\t\t\t\t\t" << setw(32) << setfill('~') << "~" << endl;
-		cout << "\t\t\t\t\t|| LIBRARY MANAGMENT SOFTWARE ||" << endl;
-		cout << "\t\t\t\t\t" << setw(32) << setfill('~') << "~" << endl;
-		cout << "\t\t\t\t\t       Discover Knowledge " << endl;
-		cout << endl << endl << endl;
-		cout << "\t\t\t\t\t     PROGRAM IS LOADING . . . \n\n\t\t\t\t\t\t JUST A MOMENT !\n ";
-		Sleep(3000);
-
-		system("cls");
+		setup();
 		cout << endl << endl;
 		cout << "\t\t\t\t\t" << setw(32) << setfill('~') << "~" << endl;
 		cout << "\t\t\t\t\t|| LIBRARY MANAGMENT SOFTWARE ||" << endl;
